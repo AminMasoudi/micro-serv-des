@@ -6,10 +6,6 @@ __pycache__/
 # migration files
 migrations/
 
-# file store
-psycity/data_dir/
-psycity/question_answer_file/
-
 # C extensions
 *.so
 
@@ -59,4 +55,5 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+**/venv
 
