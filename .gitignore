@@ -56,5 +56,6 @@ coverage.xml
 *.cover
 .hypothesis/
 **/venv
+**/.venv
 **/secret.yaml
 
