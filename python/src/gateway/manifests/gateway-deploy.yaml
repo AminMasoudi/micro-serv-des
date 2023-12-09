@@ -1,11 +1,11 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway
   labels:
     app: gateway
 spec:
-  replica: 2
+  replicas: 2
   selector:
     matchLabels:
       app: gateway
@@ -23,6 +23,6 @@ spec:
           image: aminmasoudii/gateway
           envFrom:
             - configMapRef:
-              name: gateway-configmap
+                name: gateway-configmap
             - secretRef:
-              name: gateway-secret
+                name: gateway-secret
