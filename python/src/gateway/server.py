@@ -13,7 +13,7 @@ mongo = PyMongo(server)
 
 fs = gridfs.GridFS(mongo.db)
 
-connection = pika.BlockingConnection(pika.ConnectionParameters("rabitmq"))
+connection = pika.BlockingConnection(pika.ConnectionParameters("rabbitmq"))
 channel = connection.channel()
 
 @server.route("/login", methods=["POST"])
