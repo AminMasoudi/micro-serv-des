@@ -18,6 +18,10 @@ spec:
       labels:
         app: gateway
     spec:
+      hostAliases:
+        - ip: "192.168.39.1"
+          hostnames:
+            - "host.minikube.internal"
       containers:
         - name: gateway
           image: aminmasoudii/gateway
