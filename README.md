@@ -1,9 +1,17 @@
 # micro-serv-des
-a simple app for train micro-service architecture and kept my self warm. \
+
 this app uses 
 - jwt auth
 - Docker
 - kubernetes
 - mysql
+- mongodb
+- rabbitmq
 - flask
 
+services:
+1. gateway
+2. ingress
+3. rabbitmq
+4. auth
+5. converter
