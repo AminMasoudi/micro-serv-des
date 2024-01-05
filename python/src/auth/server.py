@@ -10,7 +10,7 @@ server.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
 server.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
 server.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
 server.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
-server.config["MYSQL_PORT"] = os.environ.get("MYSQL_PORT")
+server.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT"))
 
 
 
@@ -39,7 +39,7 @@ def createJWT(username, secret, authz):
     return jwt.encode(
             {
                 "username" : username,
-                "exp" : datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(deys=1),
+                "exp" : datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(days=1),
                 "iat": datetime.datetime.utcnow(),
                 "admin": authz
             },
@@ -53,10 +53,10 @@ def validate():
     encoded_jwt = request.headers["Authorization"]
     if not encoded_jwt:
         return "oops" ,401
-    encoded_jwt = encoded_jwt.split(" ")[0]
+    encoded_jwt = encoded_jwt.split(" ")[1]
     try:
         decoded = jwt.decode(
-                encoded_jwt, os.environ.get("JWT_SECRET"), algorithm=["HS2567"])
+                encoded_jwt, os.environ.get("JWT_SECRET"), algorithms=["HS256"])
 
     except:
        return "failed to decode", 403

@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: auth-configmap
 data:
-  MYSQL_HOST: host.minikube.internal
+  MYSQL_HOST: BlackHoleSun
   MYSQL_USER: auth_user
   MYSQL_DB : auth
   MYSQL_PORT: "3306"
