@@ -4,11 +4,13 @@ from flask_pymongo import PyMongo
 from auth import validate
 from auth_svc import access
 from storage import util
+import logging
 
 
 server = Flask(__name__)
-server.config["MONGO_URI"] = "mongodb://host.minikube.internal:27017/videos"
+server.config["MONGO_URI"] = "mongodb://BlackHoleSun:27017/videos"
 
+logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 mongo = PyMongo(server)
 
 fs = gridfs.GridFS(mongo.db)
@@ -35,7 +37,8 @@ def upload():
 
         for _, f in request.files.items():
             err = util.upload(f, fs, channel, access)
-            if err:
+            if err:          
+                server.logger.warning(f'Warning level log\n{err[0]}')
                 return err
         return "Success!", 200
     else:
