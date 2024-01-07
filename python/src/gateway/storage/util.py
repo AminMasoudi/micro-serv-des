@@ -26,4 +26,4 @@ def upload(f, fs, channel, access):
     except Exception as err:
         print(err)
         fs.delete(fid)
-        return "Internal Server error:{err.__str__()}", 500
+        return f"Internal Server error:{err.__str__()}", 500
