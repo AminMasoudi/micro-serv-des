@@ -18,11 +18,11 @@ def start(message, fs_video, fs_mp3, channel):
 
     f = open(tf_path, "rb")
     data = f.read()
-    f_id = fs_mp3s.put(data)
+    f_id = fs_mp3.put(data)
     f.close()
     os.remove(tf_path)
 
-    message["mp3_fid"] = str(fid)
+    message["mp3_fid"] = str(f_id)
 
     try:
         channel.basic_publish(
