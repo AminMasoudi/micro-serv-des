@@ -15,3 +15,9 @@ services:
 3. rabbitmq
 4. auth
 5. converter
+
+## TODO:
+- [ ] write a better readme
+- [ ] write curl script helper
+- [ ] and thats v0.1
+- [ ] change gateway to django 
