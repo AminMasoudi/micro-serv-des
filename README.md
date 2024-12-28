@@ -1,45 +1,54 @@
-# micro-serv-des
-## mp4 to mp3 converter
-an example project to practice and show-off some knowledge from micro-service system design \
-this app converts mp4 files to mp3\
-how?? let me explain\
+# mp4 to mp3 Converter - A Micro-Services Example
 
-first, lets have look to how to work with:\
+github: [micro-serv-des](https://github.com/AminMasoudi/micro-serv-des)
 
-as the first step you have to register.forgot to impliment that part in this version[maybe next version]\
-so you request for login\
-a jwt token will return if you send the right credentials\
-then you send the video and the token\
-the app will validates the token ,save the video and say "we call you when its ready" to you\
-at the end when the video converted to mp3 the app will send you an email and give you an id to download the video
+Welcome to the mp4 to mp3 converter, an example project showcasing micro-service system design concepts.
 
-second, lets have a look at how the app works:\
-  the app composed from 5 micro services and rabbitmq as our message broker.\
-  it uses nginx-ingress as load balancer\
-  we write a service with flask for auth service/
-    connects to mysql database. it checks the password and validate tokens.
-  then another service as gateway with its the main part of the programm[also uses flask for now].\
-  the another two are two consumer service that connects to rabbitmq and each on listen to one channel.
-  - the converter waits until a new video upload and convert it to mp3. then save it in mongo db and place a message to audio channel.
-  - the notify service listening to audio channel. when a new audio found send an email to user and notifs him.
+## What is Micro-Service Design?
 
-this app uses 
-- jwt authentication
-- Docker
-- kubernetes
-- mysql
-- mongodb
-- rabbitmq
-- flask
+Micro-service design is an architectural style that structures an application as a collection of small, independent services. Each service runs in its own process and communicates with lightweight protocols typically over HTTP.
 
-services:
-1. gateway
-3. rabbitmq
-4. auth
-5. converter
-6. notify
+[![Microservices Architecture](https://www.redhat.com/rhdc/managed-files/monolithic-vs-microservices.png)](https://www.redhat.com/en/topics/microservices/what-are-microservices)
 
-## TODO:
-- [ ] write curl script helper
-- [ ] and thats v0.1
-- [ ] change gateway to django 
+In a micro-service architecture, each service is designed to be:
+
+* **Independent**: Each service can be developed, tested, and deployed independently of other services.
+* **Decentralized**: Services are not tightly coupled, allowing for greater flexibility and scalability.
+* **Resilient**: If one service fails or becomes unavailable, others can continue to function normally.
+
+## Overview
+
+This project demonstrates how to design and implement a scalable, distributed system using multiple micro-services. The app converts MP4 files to MP3 audio files, utilizing various technologies such as Docker, Kubernetes, MySQL, MongoDB, RabbitMQ, and Flask.
+
+## Features
+
+* Convert MP4 videos to MP3 audio files
+* Authenticates users with JWT tokens
+* Saves video metadata in a MongoDB database
+* Sends email notifications upon conversion completion
+* Utilizes RabbitMQ as the message broker
+
+## Architecture
+
+The app consists of 6 micro-services:
+
+1. **Gateway**: The main entry point, responsible for routing requests to the respective services.
+2. **Auth**: Handles authentication and token validation using JWT.
+3. **Converter**: Transforms MP4 videos into MP3 audio files.
+4. **Notify**: Sends email notifications upon conversion completion.
+5. **rabbitmq**: Handles queue for converter and notify service.
+
+## Technologies
+
+* Docker
+* Kubernetes
+* MySQL
+* MongoDB
+* RabbitMQ
+* Flask
+
+**TODO**
+
+* [ ] Add Tests
+* [ ] Implement the registration feature (planned for v0.2)
+* [ ] Migrate the Gateway service to Django (planned for v0.3)
